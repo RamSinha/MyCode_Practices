@@ -1,0 +1,24 @@
+    // Set<Number> numbers = Union.<Number>union(integers, doubles);  When the Hierarchy is not matching..
+    
+    
+    ///////////////////////////////////////////////////////////
+    //////////////////ClassLoader---Concept////////////////////
+    ///////////////////////////////////////////////////////////
+    1: Every Class loader is itself is a Class,
+    2: defineClass(getResource().getByte()) // as well as we have loadClass(String name) Also getResource() searches the same path as loadClass()
+    3: Java ClassLoader works on the concept of LazyLoading, Which mean everything is initialized at last possible moment
+    Ex:
+        public class A{
+            public static void main(String[] args) {
+                B b = new B();  // This is equivalent to b = A.class.getClassLoader().loadClass("B").newInstance();
+            }
+    }
+    4: To Know where the class are being loaded from the classloader follow below mechanism,
+       ((URLClassLoader)A.class.getClassLoader()).getURLs();
+
+    5: Above trick may not work always, This is still be achieved, using the jConsole.
+    6: We Can use JVM option in -verbose:class to get the detail of, where the class was loaded from ?
+    7: If we can changed the code, then there is also a trick--- A.class.getClassLoader().getResource(B.class.getName().replace(".","/")+".class")
+    8: Same class can't be used interchangibliy if they were loaded from different classLoader
+    9: In Context to JVM, classes are identified by the combination of ClassFull Name and the ClassLoader which loaded the class in picture. Also the package name contibutes to this combination
+    10:
