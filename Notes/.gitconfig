@@ -1,0 +1,18 @@
+[http]
+	sslVerify = false
+[user]
+	name = ram.sinha
+	email = ram.sinha@guavus.com
+[alias]
+	lol = log --oneline --graph --decorate
+        co=checkout
+	sts=status
+	st=status -uno
+        br=branch
+        last=log --abbrev-commit -n5
+[color]
+	ui = true
+	status = auto
+	branch = auto
+[branch]
+	autosetuprebase = always
