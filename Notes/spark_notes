@@ -1,0 +1,21 @@
+Setup Spark
+
+Locally using the interpreter / Standalone program
+
+Spark--> Can be set with three things -- hadoop1 (No Yarn) , Hadoop2(With Yarn), Mesos(Something like yarn or JT of Hadoop)
+
+In Spark -- Spark scheduler will be running, No need to JT on NameNode (Replaced by Master) And TaskTracker is replaced by Worker
+
+$SparkDir/bin/spark-shell (for scala)
+$SparkDir/bin/pyspark (for python)
+
+
+Spark UI--> http://192.168.191.52:4040/stages/
+
+/bin/spark-shell --master local/<IP of Node> [Number of Workers ] for eg /bin/spark-shell --master local[2]
+
+
+Spark has two sort of operations ==> Transformation and Action (This causes actually execution)
+
+
+Cache is managed by a component named BlockManager
