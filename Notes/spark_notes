@@ -19,3 +19,5 @@ Spark has two sort of operations ==> Transformation and Action (This causes actu
 
 
 Cache is managed by a component named BlockManager
+
+## sc.parallize(Seq(1,2,4)) ==> Creates and RDD from List developer phase 
