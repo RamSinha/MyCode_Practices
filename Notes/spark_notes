@@ -20,4 +20,6 @@ Spark has two sort of operations ==> Transformation and Action (This causes actu
 
 Cache is managed by a component named BlockManager
 
+Dont Send the Object params, other wise Whole object will be shiped, So better Clone whatever was supposed to be used in Mapper/Reducer Stage
+
 ## sc.parallize(Seq(1,2,4)) ==> Creates and RDD from List developer phase 
