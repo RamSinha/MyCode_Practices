@@ -23,3 +23,16 @@ Cache is managed by a component named BlockManager
 Dont Send the Object params, other wise Whole object will be shiped, So better Clone whatever was supposed to be used in Mapper/Reducer Stage
 
 ## sc.parallize(Seq(1,2,4)) ==> Creates and RDD from List developer phase 
+
+*******************************Set up Spark*********************
+mkdir ~/projects
+cd ~/projects/
+git clone git://github.com/apache/spark.git
+git checkout tags/v1.0.0
+git name-rev --tags --name-only $(git rev-parse HEAD)
+sbt/sbt assembly
+Change CLASSPATH variable to point to spark assembly jar created in .....spark-1.0.0-incubating/assembly/target/scala-2.9.3/spark-assembly-1.0.0-incubating-hadoop1.0.4.jar
+bin/spark-shell --master local[2]
+
+*****************************************************************
+
