@@ -1,0 +1,110 @@
+Redhat Package Manager is a standard for installing software in RHEL and compatible linux distros.
+To create a rpm we need following directory structure available.
+rpm_build
+ 
+   -BUILD
+ 
+   -SOURCES
+ 
+   -RPMS
+ 
+   -SRPMS
+ 
+   -SPECS
+1) Set your ~/.rpmmacros file: (this is for build user. modify as per your account.)
+%home           /home/build   
+ 
+%_topdir        %\{home}/test
+ 
+%_tmppath       /tmp
+ 
+%buildroot      %\{_tmppath}/%\{name}-root  
+2) Place the rpm sources as a tar.bz2 or tar.gz in SOURCES directory.
+3) Write a spec file to create the rpm and place it in SPECS directory.
+    A sample spec file (judy.spec) is mentioned later.
+4) Use rpmbuild command to create the rpm in RPMS directory.
+    rpmbuild -ba <spec-file-path>
+Sample Spec file: (judy.spec)
+Name: judy
+ 
+Summary: The Judy library
+ 
+Version: 1.0.5
+ 
+Release: 1.guavus%\{?dist}
+ 
+License: GPL
+ 
+Group: System Environment/Libraries
+ 
+Source: judy-1.0.5.tar.bz2
+ 
+BuildRoot: %\{tmppath}/%\{name}%\{version}%\{release}root%(%{_id_u} -n)
+ 
+%define sonamever 1%description
+ 
+Judy.
+ 
+%prep
+ 
+%setup
+ 
+%build
+ 
+./configure
+ 
+make
+ 
+%install
+ 
+rm -rf $RPM_BUILD_ROOT
+ 
+mkdir -p $RPM_BUILD_ROOT%{_libdir}
+ 
+mkdir -p $RPM_BUILD_ROOT%{_includedir}
+ 
+for i in `find . -name "*.so"`; do
+ 
+  NAME=$i;
+ 
+  SONAME=$i.%\{sonamever};
+ 
+  VNAME=$i.%\{version};  base=`basename $i`;
+ 
+  NAMEbase=$base;
+ 
+  SONAMEbase=$base.%\{sonamever};
+ 
+  VNAMEbase=$base.%\{version};
+ 
+  # remove rpath
+ 
+  chrpath --delete $VNAME;
+ 
+  install -p -m 755 $VNAME $RPM_BUILD_ROOT%{_libdir}/$VNAMEbase;
+ 
+  mv $NAME $RPM_BUILD_ROOT%{_libdir}/$NAMEbase;
+ 
+  mv $SONAME $RPM_BUILD_ROOT%{_libdir}/$SONAMEbase;
+ 
+done;
+ 
+# install include files
+ 
+install -p -m 644 src/Judy.h $RPM_BUILD_ROOT%{_includedir}/Judy.h;
+ 
+%clean
+ 
+rm -rf $RPM_BUILD_ROOT
+ 
+%post -p /sbin/ldconfig
+ 
+%postun -p /sbin/ldconfig
+ 
+%files
+ 
+%defattr(-, root, root, -)
+ 
+%{_libdir}
+ 
+%{_includedir}/*
