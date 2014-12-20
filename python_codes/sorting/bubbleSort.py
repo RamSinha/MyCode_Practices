@@ -11,6 +11,8 @@ def bubbleSort(array):
                 swapped = True
                 swap(array, j, j-1)
 def swap(array, i, j):
+    if i == j:
+        return 
     array[i] = array[i] ^ array[j]
     array[j] = array[i] ^ array[j]
     array[i] = array[i] ^ array[j]
