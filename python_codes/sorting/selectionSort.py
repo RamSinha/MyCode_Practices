@@ -10,7 +10,7 @@ def selectionSort(array):
         swap(array,index,i)
 
 def swap(array, i, j):
-    if i == j:
+    if array[i] == array[j]:
         return 
     array[i] = array[i] ^ array[j]
     array[j] = array[i] ^ array[j]

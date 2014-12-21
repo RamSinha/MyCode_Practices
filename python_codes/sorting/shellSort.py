@@ -12,7 +12,7 @@ def gapInsertionSort(alist,start,gap):
             swap(alist,i,i-gap)
             i -= gap
 def swap(array, i, j):
-    if i == j:
+    if array[i] == array[j]:
         return 
     array[i] = array[i] ^ array[j]
     array[j] = array[i] ^ array[j]
