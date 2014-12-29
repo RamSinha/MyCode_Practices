@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
  * @author ramsinha
  *
  */
-public class HFUCache {
+public class MFUCache {
 		static class CacheEntryObject implements Comparable<CacheEntryObject> {
 		private Integer data;
 		private Integer frequencyOfKey;
@@ -46,7 +46,7 @@ public class HFUCache {
 	}
 
 	private static Integer cacheCapacity;
-	private static volatile HFUCache singelTon = null;
+	private static volatile MFUCache singelTon = null;
 	private static Map<Integer, CacheEntryObject> cache = new HashMap<>();
 	private static PriorityQueue<CacheEntryObject> queue = new PriorityQueue<>();
 	/**
@@ -54,16 +54,16 @@ public class HFUCache {
 	 * @param cacheCapacityValue Capacity of the cache. One time initialization is supported currently.
 	 * @return return the shared singelton cache object.
 	 */
-	public static HFUCache createCache(int cacheCapacityValue) {
+	public static MFUCache createCache(int cacheCapacityValue) {
 		if (cacheCapacityValue <= 0) {
 			throw new IllegalArgumentException("Enter Positive value");
 		}
 		if (singelTon != null) {
 			return singelTon;
 		} else {
-			synchronized (HFUCache.class) {
+			synchronized (MFUCache.class) {
 				if (singelTon == null) {
-					singelTon = new HFUCache(cacheCapacityValue);
+					singelTon = new MFUCache(cacheCapacityValue);
 				}
 			}
 		}
@@ -71,7 +71,7 @@ public class HFUCache {
 
 	}
 
-	private HFUCache(int cacheCapacityValue) {
+	private MFUCache(int cacheCapacityValue) {
 		cacheCapacity = cacheCapacityValue;
 	}
 
