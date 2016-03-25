@@ -56,4 +56,18 @@ def f(x):
 print f.__name__  # prints 'f'
 print f.__doc__   # prints 'does some math'
 
+#class level decorator, decorated object must be a function means must be callable.
+class myDecorator(object):
+    def __init__(self,f):
+        print ('inside mydecorator.__init__()')
+	f()
+    def __call__(self):
+        print ('inside mydecorator.__call__()')
 
+
+@myDecorator
+def aFunction():
+    print ('inside a function()')
+
+print 'Finished decorating aFunction'
+aFunction()
