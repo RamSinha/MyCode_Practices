@@ -1,0 +1,70 @@
+class Tree(object):
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+    def __repr__(self):
+        return self.data
+
+    def __str__(self):
+        return str(self.data)
+
+
+def inorder(root):
+    if not root:
+        return
+    inorder(root.left)
+    print root.data
+    inorder(root.right)
+
+
+def correct_bst(root, bst_vars):
+    if root:
+        correct_bst(root.left, bst_vars)
+
+        if bst_vars.prev and root.data < bst_vars.prev.data:
+            if not bst_vars.first:
+                bst_vars.first = bst_vars.prev
+                bst_vars.middle = root
+            else:
+                bst_vars.last = root
+
+        bst_vars.prev = root
+
+        correct_bst(root.right, bst_vars)
+
+
+if __name__ == '__main__':
+    node = Tree(6)
+    node.left = Tree(10)
+    node.right = Tree(2)
+    node.left.left = Tree(1)
+    node.left.right = Tree(3)
+    node.right.right = Tree(12)
+    node.right.left = Tree(7)
+
+    inorder(node)
+
+
+    class BSTVars(object):
+        first = None
+        middle = None
+        last = None
+        prev = None
+
+
+    bst_vars = BSTVars()
+
+    correct_bst(node, bst_vars)
+    # print bst_vars.first, bst_vars.middle, bst_vars.last
+    if bst_vars.first and bst_vars.last:
+        temp = bst_vars.first
+        bst_vars.first = bst_vars.last
+        bst_vars.last = temp
+    elif bst_vars.first and bst_vars.middle:
+        temp = bst_vars.first
+        bst_vars.first = bst_vars.middle
+        bst_vars.middle = temp
+
+    inorder(node)
