@@ -11,60 +11,63 @@ class Tree(object):
         return str(self.data)
 
 
-def inorder(root):
+def inorder(root, direction='root'):
     if not root:
         return
-    inorder(root.left)
-    print root.data
-    inorder(root.right)
+    inorder(root.left, direction + '->left')
+    print root.data, direction
+    inorder(root.right, direction + '->right')
 
 
-def correct_bst(root, bst_vars):
-    if root:
-        correct_bst(root.left, bst_vars)
+class CorrectBST(object):
+    prev = None
+    first = None
+    middle = None
+    last = None
 
-        if bst_vars.prev and root.data < bst_vars.prev.data:
-            if not bst_vars.first:
-                bst_vars.first = bst_vars.prev
-                bst_vars.middle = root
+    def __init__(self, root):
+        self.inorder_correction(root)
+        self.restore_tree(root)
+
+    def inorder_correction(self, root):
+        if not root:
+            return
+        self.inorder_correction(root.left)
+        if self.prev and root.data <= self.prev.data:
+            if not self.first:
+                self.first = self.prev
+                self.middle = root
             else:
-                bst_vars.last = root
+                self.last = root
+        self.prev = root
+        self.inorder_correction(root.right)
 
-        bst_vars.prev = root
+    def restore_tree(self, root):
+        if self.first and self.last:
+            self.swap_nodes(self.first, self.last)
+        elif self.first and self.middle:
+            self.swap_nodes(self.first, self.middle)
 
-        correct_bst(root.right, bst_vars)
+    @staticmethod
+    def swap_nodes(a, b):
+        tmp = a.data
+        a.data = b.data
+        b.data = tmp
 
 
 if __name__ == '__main__':
     node = Tree(6)
-    node.left = Tree(10)
-    node.right = Tree(2)
+    node.left = Tree(2)
+    node.right = Tree(12)
     node.left.left = Tree(1)
     node.left.right = Tree(3)
-    node.right.right = Tree(12)
+    node.right.right = Tree(10)
     node.right.left = Tree(7)
 
+    print 'Before - \n'
     inorder(node)
 
+    correct_bst = CorrectBST(node)
 
-    class BSTVars(object):
-        first = None
-        middle = None
-        last = None
-        prev = None
-
-
-    bst_vars = BSTVars()
-
-    correct_bst(node, bst_vars)
-    # print bst_vars.first, bst_vars.middle, bst_vars.last
-    if bst_vars.first and bst_vars.last:
-        temp = bst_vars.first
-        bst_vars.first = bst_vars.last
-        bst_vars.last = temp
-    elif bst_vars.first and bst_vars.middle:
-        temp = bst_vars.first
-        bst_vars.first = bst_vars.middle
-        bst_vars.middle = temp
-
+    print '\nAfter - \n'
     inorder(node)
