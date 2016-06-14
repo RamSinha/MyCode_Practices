@@ -1,3 +1,4 @@
+#!/usr/local/bin/python
 def isPal(x):
     def checkForPalindrome(x,y):
         if (x < 0):   
