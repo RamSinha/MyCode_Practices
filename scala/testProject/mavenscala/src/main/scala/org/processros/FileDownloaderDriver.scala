@@ -11,7 +11,7 @@ object FileDownloaderDriver {
   def main(args: Array[String]) {
 
     if (args.length < 2) {
-      println("Usage:\n FileDownloaderDriver <localDirectoryPath> file_1 file_2 file_3 ")
+      println("Usage:\n scala -cp <path-to-jar-with-dependecy> org.processors.FileDownloaderDriver <localDirectoryPath> file_1 file_2 file_3 ")
       System.exit(1)
     }
 
