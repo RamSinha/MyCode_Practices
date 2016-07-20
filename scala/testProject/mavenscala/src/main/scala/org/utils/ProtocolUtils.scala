@@ -117,21 +117,10 @@ object ProtocolUtils {
     if (resourceDirectory.endsWith("/")) resourceDirectory else resourceDirectory + "/"
   }
 
-
   def getServerAddress(resourceURL: String ): String ={
     return new URL(resourceURL).toExternalForm
   }
-  def main(args: Array[String]) {
-//    var p = ProtocolUtils.getTargetDirectory("/ab/c/")
-//    println(p)
-    println((new URL("ftp://other.file.com/other/other_1")).toExternalForm)
-    var p = ProtocolUtils.getServerPort("https://www.google.co.in")
-    println(p)
-    p = ProtocolUtils.getFileName("ftp://other.file.com/other/other_1")
-    println(p)
 
-
-  }
 }
 
 object ProcessorConstants {

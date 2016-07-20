@@ -192,12 +192,4 @@ object SFTPProcessor extends Processor {
   }
 }
 
-object processorTester {
-  def main(args: Array[String]) {
-    //    HTTPProcessor.processFile("https://www.google.co.in", "/Users/ramsinha/Downloads/processedFiles/test.html")
-    //    HTTPProcessor.processFile("https://www.google.co.in", "/Users/ramsinha/Downloads/processedFiles/test_1.html")
-    //    HTTPProcessor.processFile("https://www.google.co.in", "/Users/ramsinha/Downloads/processedFiles/test_2.html")
-    FileUtils.forceDelete(new File("/Users/ramsinha/Downloads/fileDontExist"))
-  }
-}
 
