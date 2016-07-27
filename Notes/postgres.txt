@@ -1,0 +1,24 @@
+Postgres:
+
+// Initialise the server
+pg_ctl initdb -D <Dirname where database file will be stored.>/Users/ramsinha/Documents/postgres_local
+pg_ctl -D ./postgres_local/ -l ./postgres_local/postgres_local.log start
+
+
+//Start the server
+cd ~/Documents
+pg_ctl -D ./postgres_local/ -l ./postgres_local/postgres_local.log start
+
+
+
+//Connect to the server:
+psql --host=127.0.0.1 --username="" --password="" --dbname=postgres
+
+
+psql --host=127.0.0.1 --dbname=postgres
+
+// Details for username/password/host/port can be changed in *.conf files in data-dir.
+
+
+
+for Any advance changes refer conf files /Users/ramsinha/Documents/postgres_local/
