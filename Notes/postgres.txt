@@ -22,3 +22,7 @@ psql --host=127.0.0.1 --dbname=postgres
 
 
 for Any advance changes refer conf files /Users/ramsinha/Documents/postgres_local/
+
+
+pg_dump -U ramsinha -h localhost postgres --schema-only  // to get ddl for tables
+// http://stackoverflow.com/questions/1884758/generate-ddl-programmatically-on-postgresql
