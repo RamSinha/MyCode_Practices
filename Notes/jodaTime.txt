@@ -1,0 +1,17 @@
+**
+How to use joda time:
+**
+
+    val random = scala.util.Random
+    val dateTimezone: DateTimeZone = DateTimeZone.forID("UTC"); // TODO handle time zone accordingly
+
+    val now: DateTime = DateTime.now(dateTimezone).withTimeAtStartOfDay();
+    val currentDay = now.getDayOfMonth
+    val maxDayInMonth = now.dayOfMonth().getMaximumValue();
+
+    var startDayOfMonth = new DateTime(now.getYear, now.getMonthOfYear, 1, 0, 0, 0, 000);
+    var lastDayOfMonth = new DateTime(now.getYear, now.getMonthOfYear, now.dayOfMonth().getMaximumValue(), 0, 0, 0, 000);
+
+    val numberOfDays = Days.daysBetween(startDayOfMonth, lastDayOfMonth).getDays()
+
+    val listOfDays = for (dayIndex <- 0 to numberOfDays) yield startDayOfMonth.plusDays(dayIndex)
