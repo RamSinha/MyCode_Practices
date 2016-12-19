@@ -111,16 +111,19 @@ public class Histogram<T extends Number & Comparable<T>> {
      * @param sample
      */
     public void insertSample(T sample) {
+
+
         Interval<T> sampleInterval = getSampleInterval(sample);
-        if (sampleInterval == null) {
-            outliers.add(sample);
 
-        } else {
-            while (!printLock.tryLock()) {
+        if (printLock.tryLock()) {
+            if (sampleInterval == null) {
+                outliers.add(sample);
+            } else {
+                this.histogramSampleIntervalToSampleMap.get(sampleInterval).add(sample);
             }
-            this.histogramSampleIntervalToSampleMap.get(sampleInterval).add(sample);
+        } else {
+            insertSample(sample);
         }
-
     }
 
     /**
@@ -185,16 +188,20 @@ public class Histogram<T extends Number & Comparable<T>> {
      */
     public Double printMean() {
         Double mean = null;
+        Future<T> result = null;
         try {
             printLock.lock();
             HistogramUtil.HistogramPrintUtil printThread = new HistogramUtil.HistogramPrintUtil(new HashMap<>(histogramSampleIntervalToSampleMap), new ArrayList(outliers), HistogramUtil.Operations.GETMEAN);
-            Future<T> result = HistogramUtil.executor.submit(printThread);
-            mean = result.get().doubleValue();
-
+            result = HistogramUtil.executor.submit(printThread);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             printLock.unlock();
+        }
+        try {
+            mean = result.get().doubleValue();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return mean;
     }
@@ -206,16 +213,22 @@ public class Histogram<T extends Number & Comparable<T>> {
      */
     public Double printVariance() {
         Double variance = null;
+        Future<T> result = null;
         try {
             printLock.lock();
             HistogramUtil.HistogramPrintUtil printThread = new HistogramUtil.HistogramPrintUtil(new HashMap<>(histogramSampleIntervalToSampleMap), new ArrayList(outliers), HistogramUtil.Operations.GETVARIANCE);
-            Future<T> result = HistogramUtil.executor.submit(printThread);
+            result = HistogramUtil.executor.submit(printThread);
             variance = result.get().doubleValue();
 
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             printLock.unlock();
+        }
+        try {
+            variance = result.get().doubleValue();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return variance;
     }
