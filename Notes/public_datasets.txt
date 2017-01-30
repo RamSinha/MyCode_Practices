@@ -7,3 +7,5 @@ Quora datasets: https://www.quora.com/Where-can-I-find-large-datasets-open-to-th
 Other
 
 Name generator: http://www.fakenamegenerator.com/order.php
+
+ex: curl http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/diabetes_scale >  ./diabetes_scaled_data.txt
