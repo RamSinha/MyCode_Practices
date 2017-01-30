@@ -1,0 +1,9 @@
+BSVM datasets: http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/
+Public datasets: https://github.com/caesar0301/awesome-public-datasets
+Machine Learning dataset repo: http://archive.ics.uci.edu/ml/datasets.html
+Reddit datasets: https://www.reddit.com/r/datasets/
+Quora datasets: https://www.quora.com/Where-can-I-find-large-datasets-open-to-the-public
+
+Other
+
+Name generator: http://www.fakenamegenerator.com/order.php
