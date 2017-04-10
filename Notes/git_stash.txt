@@ -1,0 +1,2 @@
+git stash save  "local_debug_code" 
+git stash apply stash^{/local_debug} #Search is done using pattern matching.
