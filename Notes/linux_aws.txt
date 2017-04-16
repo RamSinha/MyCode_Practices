@@ -1,0 +1,7 @@
+for cfg in `grep '\[' ~/.aws/credentials`
+do
+   echo $cfg;
+   crd=$(echo $cfg |tr -d '[]');
+
+   aws support describe-trusted-advisor-check-result --profile $crd --region us-east-1 --check-id eW7HH0l7J9 --query 'result.sort_by(flaggedResources[?status!="ok"],&metadata[2])[].metadata' |jq -c '.[]|select([.[] == "Yellow"] |any)'
+done;
