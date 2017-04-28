@@ -20,7 +20,7 @@ $ mvn clean package
 
 CREATE TABLE:
 =========
-java -cp <jarName> com.veon.ticket.service.core.api.dao.DAOSlick 
+java -cp $jarName com.veon.ticket.service.core.api.dao.DAOSlick 
 
 <For simplicity postgres should have a database running by name "postgres" at localhost  without usrname and password restriction>
 above command will create the required tables.
@@ -28,7 +28,7 @@ above command will create the required tables.
 RUNNING:
 =======
 
-java -cp <jarname> com.veon.ticket.service.core.api.ReservationServiceMain
+java -cp $jarname com.veon.ticket.service.core.api.ReservationServiceMain
 
 
 DOCUMENTATION:
