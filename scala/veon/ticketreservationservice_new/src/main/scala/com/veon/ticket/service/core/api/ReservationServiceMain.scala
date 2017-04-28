@@ -7,6 +7,9 @@ import com.veon.ticket.service.core.api.dao.Mediator.{BookTicketRequest, Reserva
 import com.veon.ticket.service.core.api.logging.LoggerFactory
 import spray.can.Http
 
+/**
+  * This driver program spin up actor system and initialises the spray routes.
+  */
 object ReservationServiceMain {
   def main(args: Array[String]) {
 

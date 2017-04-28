@@ -34,6 +34,12 @@ object JsonProtocol {
 }
 
 
+/**
+  * This class contains all the DAO objects.
+  * ORM framework is SLICK.
+  */
+
+
 object DAOSlick {
 
   private val logger = Logger(LoggerFactory.getLogger(this.getClass.getName))

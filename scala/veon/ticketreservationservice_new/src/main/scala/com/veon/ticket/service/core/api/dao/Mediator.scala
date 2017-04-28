@@ -19,6 +19,11 @@ object ActorSystemFactory {
   val system = ActorSystem("on-spray-can")
 }
 
+
+/**
+  * This class contains logic interaction with postgres DB.
+  * This also uses ConsistenHashingRouter so that request for different movieID and ScreenID combination can be served concurrently
+  */
 object Mediator {
 
 

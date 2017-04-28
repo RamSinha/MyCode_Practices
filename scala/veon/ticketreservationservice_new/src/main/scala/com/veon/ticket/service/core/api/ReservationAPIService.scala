@@ -42,6 +42,9 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
 
+/**
+  * Actor initialise Spray routes.
+  */
 class ReservationAPIServiceActor extends Actor with ReservationAPIService {
 
   implicit def uncaughtExceptionHandler(implicit log: LoggingContext) =
