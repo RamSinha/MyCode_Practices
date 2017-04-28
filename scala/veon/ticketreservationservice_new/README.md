@@ -5,9 +5,6 @@ Movie reservation servie API.
 Built with spray-router running on spray-can -- http://spray.io, Akka, Slick, Postgres
 Project maintainer: ramsinha
 
-DOCUMENTATION:
-=============
-
 REQUIREMENTS:
 =========
 
