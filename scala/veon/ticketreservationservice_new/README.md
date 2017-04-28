@@ -32,3 +32,39 @@ RUNNING:
 =======
 
 java -cp <jarname> com.veon.ticket.service.core.api.ReservationServiceMain
+
+
+DOCUMENTATION:
+=======
+
+API:
+
+Health Check
+Request Type: GET
+http://localhost:8080/ticketreservation/v1
+
+
+Register a Movie
+Request Type: POST
+http://localhost:8080/ticketreservation/v1/registerMovie
+
+{
+	"imdbId" : "1",
+	"screenId" : "3",
+	"availlableSeats": 100
+}
+
+
+Make Reservation:
+Request Type: POST
+http://localhost:8080/ticketreservation/v1/makeReservation
+{
+	"imdbId" : "1",
+	"screenId" : "3"
+}
+
+Get Availability:
+Request Type: GET
+http://localhost:8080/ticketreservation/v1/getAvailability?imdbId=1&screenId=3
+
+
