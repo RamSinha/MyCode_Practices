@@ -8,7 +8,7 @@
     <description>Ticketing Service API</description>
 
     <properties>
-        <main.class.name>CCVAPIBoot</main.class.name>
+        <main.class.name>ReservationServiceMain</main.class.name>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <encoding>UTF-8</encoding>
