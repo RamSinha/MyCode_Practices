@@ -1,0 +1,43 @@
+Docker Commands:
+
+List the running machines.  
+First keep the ISO image in ~/.docker/machine/cache
+docker-machine create --driver virtualbox --virtualbox-cpu-count 3 --virtualbox-memory "8192" --virtualbox-disk-size "40960" default
+`eval "$(docker-machine env default)"` -> to setup the required env variable.
+docker-machine ls 
+docker-machine config dev
+docker-machine env dev
+docker-machine ssh dev
+
+#Find the mapping of container port to host
+docker port <containerName> <containerPort>
+#Above command will print host port mapped with container port.
+
+Run the Image:
+
+Docker run -d (flag to set daemon process) -P (map the port) —name <> <image name>
+
+Docker ps  -> list running container
+Docker inspect <container> -> for more insight. (Regarding logging and all)
+More details about file sharing and all -> https://www.viget.com/articles/how-to-use-docker-on-os-x-the-missing-guide 
+
+Dynamically update stopped or running container’s resources.
+https://stackoverflow.com/questions/27192770/how-to-change-the-resources-allocated-to-a-container-at-run-time
+
+
+Stop all docker container
+
+docker stop $(docker ps -aq)
+
+
+sudo docker exec -ti [CONTAINER-ID] bash // attach to container and run command
+
+
+ docker logs -tf  [CONTAINER-ID]  // see container log 
+
+https://docs.docker.com/engine/reference/commandline/network_connect/#description
+https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
+https://docs.docker.com/engine/userguide/networking/default_network/container-communication/
+https://docs.docker.com/engine/userguide/networking/#the-default-bridge-network
+https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
+https://docs.docker.com/engine/reference/commandline/dockerd/
