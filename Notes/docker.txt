@@ -41,3 +41,4 @@ https://docs.docker.com/engine/userguide/networking/default_network/container-co
 https://docs.docker.com/engine/userguide/networking/#the-default-bridge-network
 https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 https://docs.docker.com/engine/reference/commandline/dockerd/
+https://docs.docker.com/compose/gettingstarted/#step-4-build-and-run-your-app-with-compose

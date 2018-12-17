@@ -1,0 +1,40 @@
+version: '3'
+services:
+    zookeeper:
+        image: wurstmeister/zookeeper
+        ports:
+          - "2181:2181"
+    kafka:
+        image: wurstmeister/kafka
+        ports:
+          - "9092:9092"
+        links:
+          - zookeeper:zookeeper
+        environment:
+           KAFKA_ADVERTISED_HOST_NAME: "kafka"
+           KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+           KAFKA_ADVERTISED_PORT: "9092"
+           KAFKA_PORT: "9092"
+           KAFKA_LISTENERS: "PLAINTEXT://:9092"
+           KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
+
+    kafka-manager:
+        image: sheepkiller/kafka-manager
+        ports:
+          - "9000:9000"
+        links:
+          - zookeeper:zookeeper
+        environment:
+           ZK_HOSTS: "zookeeper:2181"
+           APPLICATION_SECRET: "letmein"
+    grafana:
+        image: grafana/grafana
+        ports:
+                - "3000:3000"
+    postgres:
+        image: "postgres:9.5"
+        environment:
+          POSTGRES_PASSWORD: grafana
+          POSTGRES_USER: grafana
+        ports:
+                - 5432:5432
