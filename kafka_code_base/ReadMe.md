@@ -15,11 +15,13 @@ docker-compose -f docker-compose.yml up -d
 ### Producer
 
 java -cp target/scala-2.11/ScalaKafkaExamples-assembly-1.0.jar com.careem.kafka.examples.MTProducer 
+
 java -cp target/scala-2.11/ScalaKafkaExamples-assembly-1.0.jar com.careem.kafka.examples.MDConsumer
 
 
 ### Consumer
 java -cp target/scala-2.11/ScalaKafkaExamples-assembly-1.0.jar com.careem.kafka.examples.MTConsumer
+
 java -cp target/scala-2.11/ScalaKafkaExamples-assembly-1.0.jar com.careem.kafka.examples.MDConsumer
 
 ### Monitor Kafka using Kafka Manager
@@ -34,9 +36,11 @@ password -> grafana
 ### API
 
 Boot Akka-HTTPService
-ava -cp target/scala-2.11/ScalaKafkaExamples-assembly-1.0.jar com.careem.kafka.examples.api.service.Boot
+
+java -cp target/scala-2.11/ScalaKafkaExamples-assembly-1.0.jar com.careem.kafka.examples.api.service.Boot
 
 Get instant supply/demand ratio http://localhost:8899/metrics/v1/ratio?at=<UTC timestamp>
+
 Get historical supply/demand ratio http://localhost:8899/metrics/v1/historicalRatio?from=<UTC timestamp>&to=<UTC timestamp>
 
 ### Grafana
