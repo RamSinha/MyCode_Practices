@@ -31,6 +31,7 @@ http://localhost:9000/clusters
 ### Login to Postgres
 
 psql --host=127.0.0.1 --username="grafana"  --dbname=postgres
+
 password -> grafana
 
 ### API
