@@ -1,4 +1,4 @@
-package com.careem.kafka.examples.api.service.http
+package com.careem.streaming.examples.api.service.http
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -7,8 +7,8 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
 import akka.stream.ActorMaterializer
-import com.careem.kafka.examples.api.exceptions.{APIException, MalformedRequestException}
-import com.careem.kafka.examples.api.service.http.routes.ServiceRoutes
+import com.careem.streaming.examples.api.exceptions.{APIException, MalformedRequestException}
+import com.careem.streaming.examples.api.service.http.routes.ServiceRoutes
 trait HttpService extends ServiceRoutes {
   implicit def system: ActorSystem
 

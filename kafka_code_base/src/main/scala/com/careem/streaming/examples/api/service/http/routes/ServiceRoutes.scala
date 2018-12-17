@@ -1,10 +1,10 @@
-package com.careem.kafka.examples.api.service.http.routes
+package com.careem.streaming.examples.api.service.http.routes
 
 import java.sql.Timestamp
 
 import akka.http.scaladsl.server.Directives._
-import com.careem.kafka.examples.api.repository.RepositoryFactory
-import com.careem.kafka.examples.api.service.responseformat.ResponseProtocol._
+import com.careem.streaming.examples.api.repository.RepositoryFactory
+import com.careem.streaming.examples.api.service.responseformat.ResponseProtocol._
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import spray.json._

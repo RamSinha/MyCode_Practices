@@ -1,10 +1,10 @@
-package com.careem.kafka.examples.api.repository.impl
+package com.careem.streaming.examples.api.repository.impl
 
 
 import java.sql.Timestamp
 
-import com.careem.kafka.examples.api.dao.ServiceDAO.{DriverPingInfo, TripRequestData, TripRequestDataTable}
-import com.careem.kafka.examples.api.repository.{Db, IRepository}
+import com.careem.streaming.examples.api.dao.ServiceDAO.{DriverPingInfo, TripRequestData, TripRequestDataTable}
+import com.careem.streaming.examples.api.repository.{Db, IRepository}
 import slick.basic.DatabaseConfig
 import slick.jdbc.JdbcProfile
 

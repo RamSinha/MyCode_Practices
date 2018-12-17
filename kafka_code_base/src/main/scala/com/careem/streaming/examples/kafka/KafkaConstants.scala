@@ -1,4 +1,4 @@
-package com.careem.kafka.examples
+package com.careem.streaming.examples.kafka
 
 object KafkaConstants {
   val KAFKA_BROKERS = "localhost:9092"

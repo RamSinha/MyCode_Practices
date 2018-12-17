@@ -1,10 +1,10 @@
-package com.careem.kafka.examples.api.repository
+package com.careem.streaming.examples.api.repository
 
 import java.sql.Timestamp
 import java.util.concurrent.Executors
 
-import com.careem.kafka.examples.api.dao.ServiceDAO.{DriverPingInfo, TripRequestData}
-import com.careem.kafka.examples.api.repository.impl.{DriverPingInfoRepository, TripDataRepository}
+import com.careem.streaming.examples.api.dao.ServiceDAO.{DriverPingInfo, TripRequestData}
+import com.careem.streaming.examples.api.repository.impl.{DriverPingInfoRepository, TripDataRepository}
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext, Future}

@@ -1,4 +1,4 @@
-package com.careem.kafka.examples
+package com.careem.streaming.examples.kafka
 
 import java.io.File
 import java.time.Instant

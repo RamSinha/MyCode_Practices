@@ -1,22 +1,22 @@
-package com.careem.kafka.examples
+package com.careem.streaming.examples.kafka
 
 import java.sql.Timestamp
 import java.util.Properties
 
-import com.careem.kafka.examples.api.dao.ServiceDAO.{DriverPingInfo, TripRequestData}
-import com.careem.kafka.examples.api.repository.RepositoryFactory
+import com.careem.streaming.examples.api.dao.ServiceDAO.{DriverPingInfo, TripRequestData}
+import com.careem.streaming.examples.api.repository.RepositoryFactory
 import org.apache.kafka.clients.consumer.{ConsumerRecords, KafkaConsumer}
 import org.apache.kafka.common.serialization.StringDeserializer
 
 import scala.collection.JavaConversions._
 
-object MDConsumer extends App {
+object MTConsumer extends App {
   val props = new Properties()
 
   import org.apache.kafka.clients.consumer.ConsumerConfig
 
   props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.KAFKA_BROKERS)
-  props.put(ConsumerConfig.GROUP_ID_CONFIG, KafkaConstants.GROUP_ID_CONFIG_D)
+  props.put(ConsumerConfig.GROUP_ID_CONFIG, KafkaConstants.GROUP_ID_CONFIG_T)
   props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, classOf[StringDeserializer].getName)
   props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, classOf[StringDeserializer].getName)
   props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, KafkaConstants.MAX_POLL_RECORDS)
@@ -25,7 +25,7 @@ object MDConsumer extends App {
 
 
   val consumer = new KafkaConsumer[String, String](props)
-  consumer.subscribe(List(KafkaConstants.TOPIC_NAME_DRIVER))
+  consumer.subscribe(List(KafkaConstants.TOPIC_NAME_TRIP))
   while (true) {
     println("Reading messages from kafka")
     pollKafkaConsumer(consumer)
@@ -47,7 +47,7 @@ object MDConsumer extends App {
           println(s"Trip Message found $record")
           val parts = record.value.split("#")
           RepositoryFactory.tripRequestRepository.addEntity(
-            TripRequestData(None, parts(0), s"${parts(1)}*${parts(2)}", s"${parts(3)}*${parts(4)}",new Timestamp((parts(5).toLong - 14400)*1000)  )
+            TripRequestData(None, parts(0), s"${parts(1)}*${parts(2)}", s"${parts(3)}*${parts(4)}",new Timestamp((parts(5).toLong - 14400) *1000)  )
           )
         }
         case KafkaConstants.TOPIC_NAME_DRIVER =>
@@ -55,7 +55,7 @@ object MDConsumer extends App {
             println(s"Driver ping Message found $record")
             val parts = record.value.split("#")
             RepositoryFactory.driverPingRepository.addEntity(
-              DriverPingInfo(None, parts(0), "DUMMY", s"${parts(1)}*${parts(2)}",new Timestamp((parts(3).toLong - 14400)*1000))
+              DriverPingInfo(None, parts(0), "DUMMY", s"${parts(1)}*${parts(2)}",new Timestamp((parts(3).toLong - 14400) * 1000))
             )
           }
         case _ => println("Unknown topic")

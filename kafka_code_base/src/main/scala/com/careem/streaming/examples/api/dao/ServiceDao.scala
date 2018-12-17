@@ -1,9 +1,9 @@
-package com.careem.kafka.examples.api.dao
+package com.careem.streaming.examples.api.dao
 
 import java.sql.Timestamp
 import java.time.Instant
 
-import com.careem.kafka.examples.api.repository.Db
+import com.careem.streaming.examples.api.repository.Db
 
 object ServiceDAO {
 

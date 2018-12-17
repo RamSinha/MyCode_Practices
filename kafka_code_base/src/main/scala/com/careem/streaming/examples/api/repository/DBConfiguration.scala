@@ -1,4 +1,4 @@
-package com.careem.kafka.examples.api.repository
+package com.careem.streaming.examples.api.repository
 
 import com.typesafe.config.ConfigFactory
 import slick.basic.DatabaseConfig

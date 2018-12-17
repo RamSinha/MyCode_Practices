@@ -1,8 +1,8 @@
-package com.careem.kafka.examples.api.service
+package com.careem.streaming.examples.api.service
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
-import com.careem.kafka.examples.api.service.http.HttpService
+import com.careem.streaming.examples.api.service.http.HttpService
 
 import scala.concurrent.ExecutionContext
 

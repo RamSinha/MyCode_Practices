@@ -1,4 +1,4 @@
-package com.careem.kafka.examples.api.service.responseformat
+package com.careem.streaming.examples.api.service.responseformat
 
 import spray.json.{DefaultJsonProtocol, JsObject, JsString, JsValue, RootJsonFormat}
 
