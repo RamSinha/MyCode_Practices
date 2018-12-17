@@ -34,6 +34,14 @@ psql --host=127.0.0.1 --username="grafana"  --dbname=postgres
 
 password -> grafana
 
+### Create tables
+
+java -cp target/scala-2.11/ScalaKafkaExamples-assembly-1.0.jar com.careem.kafka.examples.api.repository.CreateTableScript
+
+### Drop tables
+
+java -cp target/scala-2.11/ScalaKafkaExamples-assembly-1.0.jar com.careem.kafka.examples.api.repository.DropTableScript
+
 ### API
 
 Boot Akka-HTTPService
