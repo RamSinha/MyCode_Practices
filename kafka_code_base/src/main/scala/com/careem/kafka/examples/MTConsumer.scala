@@ -68,45 +68,4 @@ object MTConsumer extends App {
   private def syncCommitOffset(kafkaConsumer: KafkaConsumer[String, String]): Unit = {
     kafkaConsumer.commitAsync()
   }
-
-  /*
-    private def syncCommitOffset(kafkaConsumer: KafkaConsumer[String, String]): Unit = {
-      implicit val executionContext = waitThreadExecutor
-      kafkaConsumer.commitAsync()
-      val commitOffsetFuture = Future {
-        scala.concurrent.blocking {
-          // TODO: We should look into using `commitAsync` once Kafka consumer 1.0 is out.
-          // Sadly, kafkaConsumer.commitAsync(callback) never completes the callback.
-          // So we are using this as a workaround for now.
-          metrics.timeCommitSync {
-            kafkaConsumer.commitSync()
-          }
-        }
-      }
-
-      try {
-        Await.result(commitOffsetFuture, 5 seconds)
-      } catch {
-        case e: TimeoutException =>
-          commitOffsetFuture.onComplete { _ =>
-            kafkaConsumer.commitAsync()
-            kafkaConsumer.close()
-          }
-          throw e
-      }
-    }*/
-
-
-  /*  private val waitThreadExecutor: ExecutionContext = {
-      val threadFactory = new ThreadFactory {
-        override def newThread(r: Runnable): Thread = {
-          val thread = Executors.defaultThreadFactory().newThread(r)
-          thread.setName(s"WaiterThread${thread.getId}")
-          thread.setDaemon(true)
-          thread
-        }
-      }
-      val executorService = Executors.newFixedThreadPool(2, threadFactory)
-      ExecutionContext.fromExecutorService(executorService)
-    }*/
 }
