@@ -71,6 +71,11 @@ object CreateTableScript {
     val driverPingInitFuture = driverPingRepo.init()
     driverPingInitFuture.onFailure { case ex => ex.printStackTrace() }
     Await.result(driverPingInitFuture, Duration.Inf)
+
+    val pfLeadRepo = RepositoryFactory.pfLeadRepository
+    val pfLeadInitFuture = pfLeadRepo.init()
+    pfLeadInitFuture.onFailure { case ex => ex.printStackTrace() }
+    Await.result(pfLeadInitFuture, Duration.Inf)
   }
 }
 
