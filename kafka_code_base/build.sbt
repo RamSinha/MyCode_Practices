@@ -3,7 +3,7 @@ name := "ScalaKafkaExamples"
 version := "1.0"
 
 scalaVersion := "2.11.8"
-val sparkVersion = "2.1.0"
+val sparkVersion = "2.3.1"
 val sparkRedshiftVersion = "3.0.0-preview1"
 val sparkAvroVersion = "3.2.0"
 

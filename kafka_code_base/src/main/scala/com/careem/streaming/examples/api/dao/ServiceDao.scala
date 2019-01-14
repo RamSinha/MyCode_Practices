@@ -8,11 +8,11 @@ import com.careem.streaming.examples.api.repository.Db
 object ServiceDAO {
 
   case class TripRequestData(id: Option[Long],
-                      userId: String,
-                      pickUpLocation: String,
-                      dropOffLocation: String,
-                      requestTimeStamp: Timestamp = new Timestamp(Instant.now.toEpochMilli)
-                      )
+                             userId: String,
+                             pickUpLocation: String,
+                             dropOffLocation: String,
+                             requestTimeStamp: Timestamp = new Timestamp(Instant.now.toEpochMilli)
+                            )
 
   trait TripRequestDataTable {
     this: Db =>
@@ -52,14 +52,49 @@ object ServiceDAO {
       def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
 
       def driverId = column[String]("driver_id", O.Length(64))
+
       def driverName = column[String]("driver_name", O.Length(64))
+
       def driverLocation = column[String]("driver_location", O.Length(64))
+
       def updateTime = column[Timestamp]("update_time", O.SqlType("timestamp default now()"))
 
       def * = (id.?, driverId, driverName, driverLocation, updateTime) <> (DriverPingInfo.tupled, DriverPingInfo.unapply)
     }
 
     val driverPingEntries = TableQuery[DriverPingInfos]
+  }
+
+
+  case class LeadInfo(id: Option[Long],
+                      name: String,
+                      email: String,
+                      datetime: Timestamp,
+                      location: String,
+                      updateTime: Timestamp = new Timestamp(Instant.now.toEpochMilli))
+
+  trait LeadInfoTable {
+    this: Db =>
+
+    import config.profile.api._
+
+    class PFLeadInfos(tag: Tag) extends Table[LeadInfo](tag, "pf_lead_info") {
+      def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+
+      def name = column[String]("name", O.Length(64))
+
+      def email = column[String]("email", O.Length(64))
+
+      def datetime = column[Timestamp]("datetime", O.SqlType("timestamp default now()"))
+
+      def location = column[String]("location", O.Length(64))
+
+      def updateTime = column[Timestamp]("updateTime", O.SqlType("timestamp default now()"))
+
+      def * = (id.?, name, email, datetime, location, updateTime) <> (LeadInfo.tupled, LeadInfo.unapply)
+    }
+
+    val leadInfoEntries = TableQuery[PFLeadInfos]
   }
 
 }

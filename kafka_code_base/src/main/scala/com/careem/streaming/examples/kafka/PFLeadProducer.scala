@@ -6,7 +6,7 @@ import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, Produce
 import org.apache.kafka.common.serialization.StringSerializer
 
 
-object MTProducer extends App {
+object PFLeadProducer extends App {
   val brokerUrl = "localhost:9092"
   val props = new Properties
   props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.KAFKA_BROKERS)
@@ -17,9 +17,9 @@ object MTProducer extends App {
 
   val producer = new KafkaProducer[String, String](props)
 
-  for (m <- DataSetGenerator.getDriverDataStream()) {
-    println(s"Sending message $m to topic ${KafkaConstants.TOPIC_NAME_TRIP}")
-    val data = new ProducerRecord[String, String](KafkaConstants.TOPIC_NAME_TRIP, m)
+  for (m <- DataSetGenerator.getDummyPFLeadDataStream) {
+    println(s"Sending message $m to topic ${KafkaConstants.TOPIC_PF_LEAD}")
+    val data = new ProducerRecord[String, String](KafkaConstants.TOPIC_PF_LEAD, m)
     producer.send(data)
   }
   producer.close
