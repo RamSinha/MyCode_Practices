@@ -6,9 +6,9 @@ import com.careem.streaming.examples.api.dao.ServiceDAO.LeadInfo
 import com.careem.streaming.examples.api.repository.RepositoryFactory
 import com.careem.streaming.examples.kafka.KafkaConstants
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.types.{StringType, StructField, StructType, TimestampType}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.streaming.Trigger
+import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.joda.time.format.DateTimeFormat
 
 object RTAPFLeadStreaming {
