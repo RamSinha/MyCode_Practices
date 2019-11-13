@@ -17,7 +17,7 @@
         <scala.version>2.10.4</scala.version>
         <scala.dep.version>2.10</scala.dep.version>
         <scalalogging-slf4j.version>1.1.0</scalalogging-slf4j.version>
-        <jackson.version>2.7.6</jackson.version>
+        <jackson.version>2.10.1</jackson.version>
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
 
