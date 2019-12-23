@@ -1,4 +1,10 @@
 ## SBT
+
+* **How to build**
+```scala
+sbt assembly"
+```
+
 * **How to run**
 ```scala
 sbt "run --help"
