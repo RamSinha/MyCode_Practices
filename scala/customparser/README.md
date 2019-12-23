@@ -17,7 +17,7 @@ sbt "run --files <path1> <path2>"
 
 * **Run test**
 ```scala
-sbt test
+sbt test"
 example: sbt "run --files /Users/ramsinha/Downloads/test1.csv /Users/ramsinha/Downloads/test.csv --top 2" 
 ```
 
