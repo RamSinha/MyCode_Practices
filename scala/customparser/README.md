@@ -30,3 +30,12 @@ example: sbt "run --files /Users/ramsinha/Downloads/test1.csv /Users/ramsinha/Do
 * **--header**: To set if first line is header 
 * **--encoding**: To set custom encoding 
 * **--top**: To display number of records 
+* **--format**: "csv" to use spark-native based  
+* **--format**: "custom_csv" to use custom csv parser  
+* **--top**: To display number of records 
+
+
+Note: 
+    Custom parser doesn't support multiline output
+    Output is list of parsed cells //TODO: There shall be custom encoder to make it spark compatible
+     

@@ -1,4 +1,5 @@
 package com.parsers
+
 import com.parsers.csv.{Parser, ParserOptionConf, SparkService}
 import com.typesafe.config.ConfigFactory
 
@@ -10,5 +11,5 @@ object Runner extends App {
   val spark = new SparkService(ConfigFactory.load()).getSession()
   val parser = Parser(formatOption, spark)
   val df = parser.read(formatOption.files.toOption.get)
-  df.show(formatOption.top.toOption.get)
+  df.show(formatOption.top.toOption.get, false)
 }

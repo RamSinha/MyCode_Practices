@@ -1,7 +1,5 @@
 package com.parsers
 
-import java.io.{File, PrintWriter}
-
 import com.parsers.csv.{Parser, ParserOptionConf, SparkService}
 import com.typesafe.config.ConfigFactory
 import org.scalatest.{FlatSpec, Matchers}
@@ -9,7 +7,7 @@ import org.scalatest.{FlatSpec, Matchers}
 /**
   * @author ram.sinha on 12/23/19
   */
-class CSVParserSpec extends FlatSpec with Matchers {
+class SparkCSVParserSpec extends FlatSpec with Matchers {
   val spark = new SparkService(ConfigFactory.load()).getSession()
 
 
@@ -24,6 +22,9 @@ class CSVParserSpec extends FlatSpec with Matchers {
     val parser = Parser(formatOption, spark)
     val df = parser.read(formatOption.files.toOption.get)
     df.collect().length shouldBe 2
+
+    val l = List(1,2,3)
+    l.par
   }
 
   "Parser " should "handle field delimiters inside quoted cells" in {
@@ -69,25 +70,5 @@ class CSVParserSpec extends FlatSpec with Matchers {
     record.get(0) shouldBe """"abc,"onetwo"""
     record.get(1) shouldBe """three"""
     record.get(2) shouldBe "doremi"
-  }
-}
-
-object TestUtils {
-
-  def createFile(fileName: String, ext: String = "csv") = {
-    val tempFile = File.createTempFile(fileName, ext)
-    tempFile.deleteOnExit()
-    tempFile
-  }
-
-  def writeToTempFile(contents: String, tempFile: File): File = {
-    new PrintWriter(tempFile) {
-      try {
-        write(contents)
-      } finally {
-        close()
-      }
-    }
-    tempFile
   }
 }
