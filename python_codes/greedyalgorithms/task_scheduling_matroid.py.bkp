@@ -1,0 +1,35 @@
+#!/usr/bin/python
+from operator import itemgetter
+def generateBestSchedule(acts):
+    sortedActs = sorted(acts, key = itemgetter(2), reverse = True)
+    print sortedActs
+    capacity = 0
+    selected = []
+    rejected = []
+    for act in sortedActs:
+        if act[1] != 0:
+            if not selected:
+                selected.append(act)
+                capacity = act[1]
+            elif len(filter(lambda x: x <= act[1], map(lambda x: x[1], selected))) < act[1] and (capacity > len(selected) or act[1] > capacity):
+                selected.append(act)
+                if act[1] > capacity:
+                    capacity = act[1]
+            else:
+                rejected.append(act)
+        else:
+            rejected.append(act)
+
+    print selected
+    print rejected
+    #print 'schedule is {}'.format(map(lambda x: x[0], sorted(selected, key=itemgetter(1))) + map(lambda x: x[0], rejected))        
+    #print 'total penality {}'.format(sum(map(lambda x: x[2], rejected)))
+
+
+if __name__ == '__main__':
+    activity = raw_input('Enter comman separated name of the activity ex: a1,a2,a3,a4,a5,a6,a7\n').split(',')
+    deadline = map(lambda x: int(x), raw_input('Enter activity deadlines: 4,2,4,3,1,4,6\n').split(','))
+    penality = map(lambda x: int(x), raw_input('Enter activity penalities: 70,60,50,40,30,20,10\n').split(','))
+    assert (len(activity) == len(deadline) and len(deadline) == len(penality))
+    acts = zip(activity,deadline,penality)
+    generateBestSchedule(acts)

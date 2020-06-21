@@ -1,0 +1,28 @@
+<global optimal solution is created by making the local optimus choice (greedy-choices)>
+
+Strcuture of the greedy algorithm:
+1) We shall be left only one sub-problem after making the greedy choice.
+
+2) There can be more than one optimal solution for a given problem, we just need to prove that at-least one of the optimal solution uses greedy choice which we made. This is how we can prove that greedy choice was safe.
+
+3) When we make greedy choice we are left with only one subproblems, the last step is to prove that optimal solution to this sub-problem combined with greedy choice, results in the optimal solution to the original problem.
+
+
+ABOVE THREE RULES COMBINED DEMONSTRATE THE PROPERTY OF GREEDY CHOICE
+
+Note
+1- In dynamic algorithm the choice depends on the solution to the sub-problems while in greedy solution choice doesn't depend on the solution to sub-problems IT MAY DEPEND on greeedy choice made so far but not on choices of FUTURE sub-problems.
+Hence:
+DP --> moves bottom up.
+GA --> moves top-down.
+
+By preprocessing the input to subproblem we can usually make greedy choice efficiently. ex: in activity selection problem, input data was sorted.
+
+
+Matroid:
+M = (S,I)
+Properties:
+1- S is finite set.
+2- if A is in I and B is sub-set of A then B is in I (independent set), this is called hereditary property.
+3- If A,B are in I and |A| > |B| then any x in A-B, B U {x} also in I, this is called exchange property.
+4- All maximal indepednent subsets in I have same size.

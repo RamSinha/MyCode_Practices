@@ -1,0 +1,7 @@
+Amortized analysis is different from the probabilistic analysis. Hence this guarantees the average performace of each operation in worst case. Also this helps to gain insight of the data-structure and help optimize the design.
+1- Find T(n) /  n ==> This is A[cost]
+
+2- Also called the accounting method. When there is more than one type of operation, each type of operation may have a different amortized cost. The accounting method overcharges some operations early in the sequence, storing the overcharge as “prepaid credit” on *specific objects in the data structure*. Later in the sequence, the credit pays for operations that are charged less than they actually cost.
+
+3- Like the accounting method in that we determine the amortized cost of each operation and may overcharge op- erations early on to compensate for undercharges later. The potential method main- tains the credit as the “potential energy” of the data structure as a whole instead of associating the credit with individual objects within the data structure.
+
