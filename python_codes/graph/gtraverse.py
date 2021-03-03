@@ -41,8 +41,8 @@ class Graph(object):
             if not visited[start]:
                 result.append(start)
                 visited[start] = True
-            for e in graph[start]:
-                dfs_util(e,graph,visited,result)
+                for e in graph[start]:
+                    dfs_util(e,graph,visited,result)
         visited = defaultdict(bool)
         #result.append(s)
         #visited[s]=True

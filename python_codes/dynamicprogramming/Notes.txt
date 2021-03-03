@@ -1,20 +1,24 @@
 1- Optimal substructure:
-    1) Apply the cut-and-paste approach => Pick some choice and assume its optimum, then prove that this optimus choice exhibit to optimum solution to sub-problems.
+    1) Apply the cut-and-paste approach => Pick some choice and assume its optimum, then prove that this optimum choice exhibit to optimum solution to sub-problems.
 
-    2) Make sure that solution to each sub-problem for A GIVEN problem is independent, i.e  optimus solution to one sub-problem doesn't impact or restrict the optimum solution to other sub-problem.
+    2) Make sure that solution to each sub-problem for A GIVEN problem is independent, i.e  optimum solution to one sub-problem doesn't impact or restrict the optimum solution to other sub-problem.
 
 2- Overlapping sub-problems:
     1) DP is applicable when-> Optimus choices lead to overlapping sub-problems, If at each step new problem is generated then its not useful than any other technique (example: Divide and Conquer algorithms generate non-overlapping subproblems)
+
+Can be considered as depth-first-search of sub-problem graph
 
 2- Bottom-up approach:
    1) Applies when there is natural order in the solution of sub-problems. For ex: m[2,4] => only depends on sub-problem m[2,2], m[2,3], m[3,4].
    2) Bottom-up approach works well in most of the case since there is less procedural calls however in case of top-down approach at-times one may skip entire sub-problem based on some-condition. ex: LCS
       Top down approach solves problems which are definitely required hence it may led to faster runtime when there are conditional statement in deciding subproblems.
 
+Can be considered as topological-sort of sub-problem graph
+
 Runtime:
 Depends on two important factors:
 1- Number of choices available for each problems
-2- Number of sub-problems
+2- Number of sub-problems (DISTINCT)
 
 For rod cutting:
    1) O(n)
@@ -26,3 +30,8 @@ For metrix multiplication:
    2) n
    hence overall runtime was O(n^3)
 
+
+# Usually sufficient for solving two dimentional dynamic programming problem
+    for l in range(2,n+1):
+        for i in range(0,n-l+1):
+            j=i+l-1

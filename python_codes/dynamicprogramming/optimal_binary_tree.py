@@ -43,13 +43,65 @@ def generateOptimumTree(k,d,keys):
                     root[i][j] = r
     return (w,root,e)
 
+def generateOptimumTreeWithoutPositionalHack(keyPriority, d):
+    n = len(keyPriority) #total number of keys
+    w = [[0] * len(d) for _ in range(n + 2)]
+    root = [[None] * len(d) for _ in range(n+2)]
+    e = [[None] * len(d) for _ in range(n+2)]
+    for i in range(1, n+2):
+        e[i][i-1] = d[i-1]
+        w[i][i-1] = d[i-1]
+    for l in range(1,n+1):
+        for i in range(1, n-l + 2):
+            j=i+l-1
+            w[i][j] = w[i][j-1] + keyPriority[j-1] + d[j]
+            e[i][j] = sys.maxint
+            for r in range(i,j+1):
+                c= e[i][r-1] + e[r+1][j] + w[i][j]
+                if c < e[i][j]:
+                    e[i][j] = c
+                    root[i][j] = r
+    print 'weight: \n{w}'.format(w=np.matrix(w))
+    print 'root: \n{r}'.format(r=np.matrix(root))
+    print 'cost: \n{c}'.format(c=np.matrix(e))
+    printOptimalBinarySearchTree(root, 1, n, 0)
+
+def printOptimalBinarySearchTree(root, i, j, last):
+    if i == j:
+        if last > root[i][j]:
+            print 'k{} is {} child of k{}'.format(root[i][j], 'left', last)
+        else:
+            print 'k{} is {} child of k{}'.format(root[i][j], 'right', last)
+        printOptimalBinarySearchTree(root, i, i-1, i)    
+        printOptimalBinarySearchTree(root, j+1, j, j)    
+        return    
+    if i > j:
+        if i == last:
+            print 'd{} is {} child of k{}'.format(j, 'left', last)
+        else:
+            print 'd{} is {} child of k{}'.format(j, 'right', last)
+        return    
+    r = root[i][j]
+    if last == 0:
+        print 'k{} is {} of optimal tree'.format(r, 'root')
+    elif r > last:
+        print 'k{} is {} child of k{}'.format(r, 'right', last)
+    else:    
+        print 'k{} is {} child of k{}'.format(r, 'left', last)
+    printOptimalBinarySearchTree(root, i, r-1, r)    
+    printOptimalBinarySearchTree(root, r+1, j, r)    
+
+            
+        
 
 if __name__ == '__main__':
-    keyPriority = [0, 0.15, 0.10, 0.05, 0.10, 0.20] # Added zero at the start to keep then structural schemantics of the algorithm.
+    keyPriority = [0.15, 0.10, 0.05, 0.10, 0.20] # Added zero at the start to keep then structural schemantics of the algorithm.
+    keyPriorityPadded = [0, 0.15, 0.10, 0.05, 0.10, 0.20] # Added zero at the start to keep then structural schemantics of the algorithm.
     dummyNodePriority = [0.05, 0.10, 0.05, 0.05, 0.05, 0.10]
-    keys = map(lambda x: 'key{x}'.format(x = x), range(1,len(keyPriority)))
-    (weight,root,cost) = generateOptimumTree(keyPriority, dummyNodePriority, keys)
+    keys = map(lambda x: 'key{x}'.format(x = x), range(1,len(keyPriorityPadded)))
+    (weight,root,cost) = generateOptimumTree(keyPriorityPadded, dummyNodePriority, keys)
     print 'weight: \n{w}'.format(w=np.matrix(weight[1:]))
     print 'root: \n{r}'.format(r=np.matrix(root[1:]))
     print 'cost: \n{c}'.format(c=np.matrix(cost[1:]))
-
+    print ("\n ***************\n")
+    generateOptimumTreeWithoutPositionalHack(keyPriority, dummyNodePriority)

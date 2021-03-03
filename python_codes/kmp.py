@@ -3,7 +3,8 @@
 def pre_process_pattern(input):
     prefix_matrix = [0 for _ in range(len(input))]
     k = 0
-    for i in range(1, len(input)):
+    for i in range(1, len(input)): 
+        ## Remember k represents length of max proper prefix but arrays are zero based
         while k > 0 and input[k] != input[i]:
             k = prefix_matrix[k-1]
         if input[k] == input[i]:

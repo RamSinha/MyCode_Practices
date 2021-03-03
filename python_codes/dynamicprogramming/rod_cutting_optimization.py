@@ -48,7 +48,45 @@ def max_revenue_bootum_up(p, size):
     print bottom_up
     return bottom_up[size-1]
 
+
+def max_revenue_memoized_t(p, size, memoized):
+    if size == 0:
+        return 0
+    if memoized[size] and memoized[size]  >= 0:
+        return memoized[size]
+    q = memoized[size]
+    for i in range(1, size+1):
+        q = max(q, p[i] + max_revenue_memoized_t(p, size -i , memoized))
+    memoized[size] = q
+    return q
+
+'''
+Below method adds a dummy entry to the input to avoid the positional argument more cohrent with the logic and makes the code more readable
+'''
+def max_revenue_bootum_up_t(p, size):
+    revenue = [None]*(size + 1)
+    revenue[0] = 0
+    sol = [0]*(size+1)
+    for i in range(1, size + 1):
+        q=-1
+        for j in range(1, i+1):
+            newCost = p[j] + revenue[i-j]
+            if q < newCost:
+                q = newCost
+                sol[i] = j
+        revenue[i] = q
+    def printSol(soln, size):
+        if size == 0:
+            return ['']
+        return [str(soln[size])] + printSol(soln, size - soln[size])
+    print('Optimal cuts for size= ' + str(size) +  ' are as follows [' + ' '.join(printSol(sol, size)).strip() + '] with max revenue = '+ str(revenue[size]))
+    return revenue[size]    
+
 if __name__ == '__main__':
+    #cost_metrics = [1,5,8,9,10,17,17,20,24,30]
+    #print (max_revenue_bootum_up_t([0]+cost_metrics , 4))
+    #print (max_revenue_bootum_up_t([0]+cost_metrics , 6))
+    #print (max_revenue_bootum_up_t([0]+cost_metrics , 7))
     cost_metrics = [1,5,8,9,10,17,17,20,24,30]
     print 'enter the cost from metrics ex: {cost_metrics}'.format(cost_metrics = ",".join(map(lambda x: str(x), cost_metrics)))
     cost_metrics = map(lambda x: int(x) , raw_input().split(","))
@@ -60,4 +98,6 @@ if __name__ == '__main__':
     print 'Max revenue that can be generated is: {revenue}'.format(revenue = max_revenue_memoized(cost_metrics, rod_size, [None]*len(cost_metrics)))
     print time.time()
     print 'Max revenue that can be generated is: {revenue}'.format(revenue = max_revenue_bootum_up(cost_metrics, rod_size))
+    print time.time()
+    print 'Max revenue that can be generated is: {revenue}'.format(revenue = max_revenue_memoized_t([0] + cost_metrics, rod_size, [None]*(rod_size+1)))
     print time.time()

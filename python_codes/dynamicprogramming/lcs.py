@@ -29,6 +29,40 @@ def find_longest_common_subsequence(first, second, c, s):
                     c[i][j]=0
                     s[i][j]='left'
 
+def find_longest_common_subsequence_md(first, second):
+    c = [[0]*(len(second) +1) for _ in range(len(first) + 1 )]
+    s = [[None]*(len(second) +1) for _ in range(len(first) + 1 )]
+    for i in range(1, len(first)+1):
+        c[i][0] = 0
+    for j in range(1, len(second)+1):
+        c[0][j] = 0
+    for i in range(1, len(first) + 1 ):
+        for j in range(1, len(second) + 1 ):
+            if first[i-1] == second[j-1]:
+                c[i][j] = 1 + c[i-1][j-1]
+                s[i][j] = 'd'
+            elif c[i-1][j] > c[i][j-1]:
+                    c[i][j] = c[i-1][j]
+                    s[i][j] = 'u'
+            else:
+                c[i][j] = c[i][j-1]
+                s[i][j] = 'l'
+    def printSolution(s1, s2, s, i, j, result):
+        if i == 0 or j == 0:
+            return 
+        if s[i][j] == 'd':
+            printSolution(s1, s2, s, i-1, j-1, result)
+            result.append(s2[j-1])
+        if s[i][j] == 'l':
+            printSolution(s1, s2, s, i, j-1, result)
+        if s[i][j] == 'u':
+            printSolution(s1, s2, s, i-1, j, result)
+
+    result = []
+    printSolution(first, second, s, len(first), len(second), result)
+    print "s1={s1}\ns2={s2}\nlcs={lcs}".format(s1=first, s2=second, lcs=''.join(result))
+
+
 #exercise 15.4-2
 
 def print_lcs_with_length_metrics_only(s1,s2,c,solution):
@@ -91,6 +125,7 @@ def do_test(s1,s2):
     solution=[]
     print_lcs(s1,s2,s,solution)
     print "s1={s1}\ns2={s2}\nlcs={lcs}".format(s1=s1, s2=s2, lcs=''.join(solution))
+    find_longest_common_subsequence_md(s1,s2)
     #print "s1={s1}, s2={s2},\ncost:\n{cost}\nsol:\n{sol}\nlcs= {lcs}".format(s1=s1, s2=s2, cost=nm.matrix(c), sol=nm.matrix(s),lcs=''.join(solution))
     print ("\nMETHOD-2 \n")
     solution=[]
@@ -100,8 +135,8 @@ def do_test(s1,s2):
 
 if __name__ == '__main__':
     #do_test('ab','a')
-    #do_test('ACCGGTCGAGTGCGCGGAAGCCGGCCGAA','GTCGTTCGGAATGCCGTTGCTCTGTAAA')
-    do_test('ABCBDAB','BDCABA')
-    print "\nNEW TEST \n"
-    do_test('ABCBAB','BCABA')
+    do_test('ACCGGTCGAGTGCGCGGAAGCCGGCCGAA','GTCGTTCGGAATGCCGTTGCTCTGTAAA')
+    #do_test('ABCBDAB','BDCABA')
+    #print "\nNEW TEST \n"
+    #do_test('ABCBAB','BCABA')
 

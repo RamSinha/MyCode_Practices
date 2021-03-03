@@ -53,7 +53,7 @@ def main():
 
     # Input keys (use only 'a' through 'z' and lower case)
     keys = ["the","a","there","anaswe","any",
-            "by","their"]
+            "by","their", "car", "capr"]
     output = ["Not present in trie",
               "Present in tire"]
 
@@ -69,6 +69,7 @@ def main():
     print("{} ---- {}".format("these",output[t.search("these")]))
     print("{} ---- {}".format("their",output[t.search("their")]))
     print("{} ---- {}".format("thaw",output[t.search("thaw")]))
+    print("{} ---- {}".format("cap",output[t.search("cap")]))
 
 if __name__ == '__main__':
     main()
