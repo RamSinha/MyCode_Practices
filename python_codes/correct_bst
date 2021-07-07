@@ -1,0 +1,73 @@
+class Tree(object):
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+    def __repr__(self):
+        return self.data
+
+    def __str__(self):
+        return str(self.data)
+
+
+def inorder(root, direction='root'):
+    if not root:
+        return
+    inorder(root.left, direction + '->left')
+    print root.data, direction
+    inorder(root.right, direction + '->right')
+
+
+class CorrectBST(object):
+    prev = None
+    first = None
+    middle = None
+    last = None
+
+    def __init__(self, root):
+        self.inorder_correction(root)
+        self.restore_tree(root)
+
+    def inorder_correction(self, root):
+        if not root:
+            return
+        self.inorder_correction(root.left)
+        if self.prev and root.data <= self.prev.data:
+            if not self.first:
+                self.first = self.prev
+                self.middle = root
+            else:
+                self.last = root
+        self.prev = root
+        self.inorder_correction(root.right)
+
+    def restore_tree(self, root):
+        if self.first and self.last:
+            self.swap_nodes(self.first, self.last)
+        elif self.first and self.middle:
+            self.swap_nodes(self.first, self.middle)
+
+    @staticmethod
+    def swap_nodes(a, b):
+        tmp = a.data
+        a.data = b.data
+        b.data = tmp
+
+
+if __name__ == '__main__':
+    node = Tree(6)
+    node.left = Tree(2)
+    node.right = Tree(12)
+    node.left.left = Tree(1)
+    node.left.right = Tree(3)
+    node.right.right = Tree(10)
+    node.right.left = Tree(7)
+
+    print 'Before - \n'
+    inorder(node)
+
+    correct_bst = CorrectBST(node)
+
+    print '\nAfter - \n'
+    inorder(node)
