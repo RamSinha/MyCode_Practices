@@ -1,6 +1,6 @@
-package com.qc.config
+package com.dl.config
 
-import org.rogach.scallop.{ScallopConf, ScallopOption, singleArgConverter}
+import org.rogach.scallop.{ScallopConf, ScallopOption}
 
 /**
  * @author ram.sinha on 1/23/22
