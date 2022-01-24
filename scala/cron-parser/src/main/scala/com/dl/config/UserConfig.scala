@@ -3,7 +3,7 @@ package com.qc.config
 import org.rogach.scallop.{ScallopConf, ScallopOption, singleArgConverter}
 
 /**
- * @author ram.sinha on 8/27/21
+ * @author ram.sinha on 1/23/22
  */
 
 
