@@ -33,8 +33,10 @@ def max_revenue_bootum_up(p, size):
     bottom_up[0]=p[0]
     solution = [None]*(len(p))
     solution[0]=0
+    # no of subproblems -> n
     for i in range(1, len(p)):
         q=-sys.maxsize -1
+        # no of choices for each sub-problem -> n
         for j in range(0,i+1):
             old = q
             if i == j:

@@ -1,4 +1,4 @@
-<global optimal solution is created by making the local optimus choice (greedy-choices)>
+<global optimal solution is created by making the local optimal choice (greedy-choices)>
 
 Strcuture of the greedy algorithm:
 1) We shall be left only one sub-problem after making the greedy choice.
@@ -11,13 +11,18 @@ Strcuture of the greedy algorithm:
 ABOVE THREE RULES COMBINED DEMONSTRATE THE PROPERTY OF GREEDY CHOICE
 
 Note
-1- In dynamic algorithm the choice depends on the solution to the sub-problems while in greedy solution choice doesn't depend on the solution to sub-problems IT MAY DEPEND on greeedy choice made so far but not on choices of FUTURE sub-problems.
+1- In dynamic algorithm the choice depends on the solution to the sub-problems while in greedy solution choice doesn't depend on the solution to sub-problems IT MAY DEPEND on greeedy choices made so far but not on choices of FUTURE sub-problems.
 Hence:
 DP --> moves bottom up.
 GA --> moves top-down.
 
-By preprocessing the input to subproblem we can usually make greedy choice efficiently. ex: in activity selection problem, input data was sorted.
+* By preprocessing the input to subproblem we can usually make greedy choice efficiently. ex: in activity selection problem, input data was sorted.
 
+* Data ordering -> To finalize in which order shall we make choice and construct solution
+* Induction -> One more useful technique
+* Check if we can make use of devide and conquer 
+* Exchange trick -> very useful to proof greedy choice was safe
+NOTE: Often its useful to understand how intermediate data-structure changes, they may show some pattern which can be utilized to reduce the overall complexity. ex: in LIS its found that last element in the inceasing seq of len l form sorted list.. for l in [1,n].. this allowed us to make use of binary-search.
 
 Matroid:
 M = (S,I)
@@ -26,3 +31,26 @@ Properties:
 2- if A is in I and B is sub-set of A then B is in I (independent set), this is called hereditary property.
 3- If A,B are in I and |A| > |B| then any x in A-B, B U {x} also in I, this is called exchange property.
 4- All maximal indepednent subsets in I have same size.
+
+
+if x belongs to S and does not belond to A then if A U {x} is independent then x is called extension to A
+Also- A is called maximal when A can't be extended further.
+
+
+
+
+General Algorithms for Matroids:
+
+Sort the elements of S in decereasing order of their weight and then iterate over them
+
+def greedy (M, w):
+    A = {}
+    sort M:S into monotonically decreasing order by weight w
+    for each x in M.S, taken in monotonically decreasing order by weight w.x
+        if x U A is independent then:
+            A = A U x
+    return A
+
+
+
+

@@ -7,9 +7,8 @@ def insertion_sort(array):
             array[j+1]=array[j]
             j-=1
         array[j+1]=key
-    print array
-        
 
 if __name__ == '__main__':
-    inputArray = [int (i) for i in raw_input().split(' ')]
+    inputArray = [int (i) for i in raw_input('Enter elements ex: 9 1 7 13 -1 \n').split(' ')]
     insertion_sort(inputArray)
+    print (inputArray)

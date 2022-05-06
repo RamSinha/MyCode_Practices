@@ -1,7 +1,14 @@
 #!/usr/bin/python
 def quickSort(array, left, right):
+    # base case -> left == right mean single element
+    #           -> left > right mean empty array
     if left >= right:
         return
+    '''
+    Any element on left side of last is smaller than pivot
+    last refer to position where any smaller element shall be
+    placed.
+    '''
     last = (left + right)/2
     swap (array, left, (left+right)/2)
     last = left
@@ -21,6 +28,6 @@ def swap(array, i, j):
     array[i] = array[i] ^ array[j]
 
 if __name__=='__main__':
-    input = [int(i) for i in raw_input().split(' ')]
-    quickSort(input,0, len(input)-1)
-    print input
+    inputArray = [int(i) for i in raw_input().split(' ')]
+    quickSort(inputArray,0, len(inputArray)-1)
+    print inputArray

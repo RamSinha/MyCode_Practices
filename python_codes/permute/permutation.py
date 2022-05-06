@@ -4,6 +4,7 @@ def permute(inputStr, d):
         print (inputStr)
     else:
         lastSwap = None
+        # P(abc) = a * P(bc) + b * P(ac) + c * P(ba)
         for i in range(d, len(inputStr)):
             if lastSwap == inputStr[i]:
                 continue
@@ -16,4 +17,4 @@ def swap(s,i,j):
     c[i],c[j] = c[j],c[i]
     return ''.join(c)
 
-permute("abcd",0)
+permute("aabc",0)

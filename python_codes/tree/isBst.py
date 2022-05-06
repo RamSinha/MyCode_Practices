@@ -6,7 +6,21 @@ class Node(object):
         self.left = None
         self.right = None
 
-def isBstUtil(root, lRange=-sys.maxint-1, rRange=sys.maxint):
+
+def isBSTInOrder(root, prev = {}):
+    if root is None:
+        return True
+    res = isBSTInOrder(root.left, prev)
+    if res is False:
+        return res
+    if "prev" in prev:
+        if prev["prev"].label > root.label:
+            return False
+    prev["prev"] = root
+    return isBSTInOrder(root.right, prev)
+
+
+def isBstUtil(root, lRange=-sys.maxsize-1, rRange=sys.maxsize):
     if not root:
         return True
     if root.label > lRange and root.label < rRange:
@@ -23,4 +37,5 @@ if __name__ == '__main__':
     t.left.right = Node(9)
     t.right.left = Node(11)
     t.right.right = Node(15)
-    print isBstUtil(t)
+    print (isBstUtil(t))
+    print (isBSTInOrder(t))

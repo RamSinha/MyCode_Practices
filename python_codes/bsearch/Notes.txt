@@ -1,0 +1,7 @@
+1- mid = start  + end  // 2 
+   always remember-> mid always moves towards end unless start + 1 = end
+   when start = end -> then mid = start = end --> this may led to infinite loop
+   when start + 1 = end -> then mid => start // special case this may led to infinite loop
+
+
+2- Always assign logical meaning to start and end -> essentially write down what does start and end represent and, what's the solution space and which variable moves towards the solution.

@@ -52,6 +52,7 @@ def generateOptimumTreeWithoutPositionalHack(keyPriority, d):
         e[i][i-1] = d[i-1]
         w[i][i-1] = d[i-1]
     for l in range(1,n+1):
+        # range (0 , n -l + 1 ) ==> range( 0 + 1 , n - l + 1 + 1)
         for i in range(1, n-l + 2):
             j=i+l-1
             w[i][j] = w[i][j-1] + keyPriority[j-1] + d[j]
@@ -65,6 +66,30 @@ def generateOptimumTreeWithoutPositionalHack(keyPriority, d):
     print 'root: \n{r}'.format(r=np.matrix(root))
     print 'cost: \n{c}'.format(c=np.matrix(e))
     printOptimalBinarySearchTree(root, 1, n, 0)
+    tree = createOptimalTree(root, 1, n)
+    inorderTraversal(tree)
+
+
+class Node(object):
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def createOptimalTree(root, left, right):
+    if left > right:
+        return Node('d{}'.format(right))
+    subTreeRootValue = left if left == right else root[left][right]
+    subtreeRoot = Node('k{}'.format(subTreeRootValue))
+    subtreeRoot.left = createOptimalTree(root, left, subTreeRootValue -1)
+    subtreeRoot.right = createOptimalTree(root, subTreeRootValue + 1, right)
+    return subtreeRoot
+
+def inorderTraversal(root):
+    if root:
+        inorderTraversal(root.left)
+        print root.value + ' ',
+        inorderTraversal(root.right)
 
 def printOptimalBinarySearchTree(root, i, j, last):
     if i == j:

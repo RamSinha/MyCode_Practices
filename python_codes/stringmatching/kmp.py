@@ -15,6 +15,7 @@ def pre_process_pattern(input):
 
 def find_all_occurrence(t, p):
     prefix_matrix = pre_process_pattern(p)
+    print prefix_matrix
     q = 0
     for i in range(len(t)):
         while q > 0 and p[q] != t[i]:

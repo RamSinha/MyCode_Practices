@@ -11,6 +11,39 @@ class Node(object):
     def __repr__(self):
         return str(self.value)
 
+
+    def printInorderUsingStack(self):
+        current = self
+        stack = []
+        while True:
+            if current:
+                stack.append(current)
+                current = current.left
+            elif stack:
+                current = stack.pop()
+                print current, 
+                current = current.right
+            else:
+                break
+            
+
+
+
+    def printPreOrderUsingStack(self):
+        if not self:
+            return self
+        stack = [self]
+        result = []
+        while(len(stack) > 0):
+            top = stack.pop()
+            result.append(top.value)
+            if top.right:
+                stack.append(top.right)
+            if top.left:
+                stack.append(top.left)
+        return result        
+
+
     def printLevelOrderUsingTwoQ(self):
         print '\n' + inspect.currentframe().f_code.co_name +'\n'
         lookup = defaultdict(list)
@@ -97,6 +130,15 @@ class Node(object):
         for k in sorted(lookup):
             print lookup[k]
 
+    def mirrorTree(self):
+        if self:
+            mirror = Node(self.value)
+            if self.left:
+                mirror.right = self.left.mirrorTree()
+            if self.right:    
+                mirror.left = self.right.mirrorTree()
+            return mirror
+
 
 
 if __name__ == '__main__':
@@ -106,14 +148,17 @@ if __name__ == '__main__':
     t.left.left = Node(3)
     t.left.right = Node(9)
     t.right.left = Node(11)
-    t.right.right = Node(15)
-    t.left.right.left = Node(19)
-    t.left.right.right = Node(29)
-    t.right.right.left = Node(25)
-    t.right.right.right = Node(35)
-    t.printLevelOrderUsingTwoQ()
-    t.printLevelOrder()
-    t.printLevelOrderSpecialChar()
-    t.printTreeVertical()
-    t.printTreeVerticaUsingLevelOrder()
+    #t.right.right = Node(15)
+    #t.left.right.left = Node(19)
+    #t.left.right.right = Node(29)
+    #t.right.right.left = Node(25)
+    #t.right.right.right = Node(35)
+    #t.printLevelOrderUsingTwoQ()
+    #t.printLevelOrder()
+    #t.printLevelOrderSpecialChar()
+    #t.printTreeVertical()
+    #t.printTreeVerticaUsingLevelOrder()
+    #print (t.printPreOrderUsingStack())
+    print (t.printInorderUsingStack())
+    print (t.mirrorTree().printInorderUsingStack())
 

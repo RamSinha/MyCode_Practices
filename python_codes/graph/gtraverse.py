@@ -1,6 +1,6 @@
-#!/usr/bin/python
-from collections import defaultdict
+#/usr/bin/python
 
+from collections import defaultdict
 class Node(object):
 
     def __init__(self, name):
@@ -19,6 +19,7 @@ class Graph(object):
 
     def __init__(self):
         self.graph = defaultdict(list)
+        self.time = 0
 
     def addEdge(self, u, v):
         self.graph[u].append(v)
@@ -36,13 +37,30 @@ class Graph(object):
                 visited[q]=True
         return result        
 
-    def dfs(self,s,result):
+    def dfs1(self,s,result):
         def dfs_util(start, graph, visited, result):
             if not visited[start]:
                 result.append(start)
                 visited[start] = True
                 for e in graph[start]:
                     dfs_util(e,graph,visited,result)
+        visited = defaultdict(bool)
+        #result.append(s)
+        #visited[s]=True
+        for e in self.graph.keys():
+            if not visited[e]:
+                temp = []
+                dfs_util(e,self.graph,visited,temp)
+                result.append(temp)
+
+    def dfs(self,s,result):
+        def dfs_util(start, graph, visited, result):
+            result.append(start)
+            visited[start] = True
+            for e in graph[start]:
+                if visited[e]:
+                    continue
+                dfs_util(e,graph,visited,result)
         visited = defaultdict(bool)
         #result.append(s)
         #visited[s]=True
@@ -78,6 +96,31 @@ class Graph(object):
                 pathQueue.append(lastPath + [n])
         return None
             
+    def findBridge(self):
+        discoveryTime = dict([(k,float('inf')) for (k,_) in self.graph.items()])
+        deepestBackEdge = dict([(k,float('inf')) for (k,_) in self.graph.items()])
+        parent = dict([(k,None) for k,v in self.graph.items()])
+        visited = defaultdict(bool)
+        for v in self.graph.keys():
+            if visited[v] is False:
+                self.findBridgeUtil(discoveryTime, deepestBackEdge, v, visited, parent)
+
+    def findBridgeUtil(self, discoveryTime, deepestBackEdge, root, visited, parent):
+        visited[root] = True
+        discoveryTime[root] = self.time
+        deepestBackEdge[root] = self.time
+        self.time = self.time + 1
+        for vertex in self.graph[root]:
+            if visited[vertex] == False:
+                parent[vertex] = root
+                self.findBridgeUtil(discoveryTime, deepestBackEdge, vertex, visited, parent)
+                deepestBackEdge[root] = min (deepestBackEdge[vertex], deepestBackEdge[root])
+                if deepestBackEdge[vertex] > discoveryTime[root]:
+                    print ('found bridge at {u} -- {v}'.format(u = root, v = vertex) )
+            elif parent[root] != vertex:
+                deepestBackEdge[root] = min(deepestBackEdge[root], discoveryTime[vertex])
+
+
 
 if __name__ == '__main__':
     g = Graph()
@@ -88,12 +131,14 @@ if __name__ == '__main__':
     g.addEdge(Node('b'),Node('e'))
     g.addEdge(Node('d'),Node('f'))
     g.addEdge(Node('p'),Node('q'))
+    g.addEdge(Node('c'),Node('a'))
     result = []
     g.dfs(Node('a'), result)
     print result
-    result = []
-    g.bfs(Node('a'),result)
-    print result
-    print g.findShortestPathDFS(Node('a'), Node('f'))
-    print g.findShortestPathBFS(Node('a'), Node('f'))
+    #result = []
+    #g.bfs(Node('a'),result)
+    #print result
+    #print g.findShortestPathDFS(Node('a'), Node('f'))
+    #print g.findShortestPathBFS(Node('a'), Node('f'))
+    #g.findBridge()
 

@@ -22,6 +22,6 @@ def mergeSort(array,p,r):
         mergeSort(array, q+1, r)
         merge(array, p, q, r)
 if __name__=='__main__':
-    input = [int(i) for i in  raw_input().split(' ')]
-    mergeSort(input,0, len(input)-1)
-    print input
+    inputArray = [int(i) for i in  raw_input().split(' ')]
+    mergeSort(inputArray,0, len(inputArray)-1)
+    print inputArray

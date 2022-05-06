@@ -1,0 +1,48 @@
+1- All the systems can be considered as box.
+2- Box in which we store data and query data from.
+
+
+                ----------------
+                |              | 
+                |              |
+                |     System   |
+                |      Box     |
+                |              |
+                |              |
+                |              |
+                ----------------
+
+
+
+
+This naturally opens up some questions:
+1- Who will write data
+2- Who will read data
+3- How much data will be written.  [volumne]
+4- How fast data will be written. [write query per second] [what is tail latency ? p99]
+5- How fast data is EXPECTED to be written [speed]
+6- How much data will be queried [point in time, last 1 year data] [volume]
+7- How fast data will be queried.[read query per second]
+8- How fast data is EXPECTED to be retrieved [speed] [what is tail latency ? p99]
+9- Cost?
+
+
+
+Functional Requirements:
+1- What action the system is supposed to take?
+2- How whould it look like if it was just a method ? change the method to API..
+   Think about what will be input to these method? this eventually will become query param of API..
+
+
+Non Functional Requirements:
+1- Performance
+2- Scalability
+3- Availability
+4- Correct/ Reliable
+
+
+
+
+
+
+

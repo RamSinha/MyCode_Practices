@@ -32,6 +32,21 @@ def findMaxActivities(pair):
     findMaxActivitiesUtil(pair, 1, 0, result)
     return result
 
+
+def findMaxActivitiesUsingMaxStartTime(pair):
+    indexLookup = range(len(pair))
+    indexLookup.sort(key = lambda x : pair[x][0]) # this is to preserve the order of the inputs
+    pair.sort(key=lambda x: x[0])
+    result = []
+    for i in range(len(pair))[::-1]:
+        if result:
+            last = result[0]
+            if pair[i][1] <= pair[last][0]:
+                result = [i] + result
+        else:
+            result.append(i)
+    return map(lambda x: 'a{i}'.format(i=indexLookup[x]), result)
+
 if __name__ == '__main__':
     activity_start = map(lambda x : int(x), raw_input('enter start of activities ex: 1,3,0,5,3,5,6,8,8,2,12\n').split(","))
     activity_end = map(lambda x : int(x), raw_input('enter end of activities ex: 4,5,6,7,9,9,10,11,12,14,16\n').split(","))
@@ -40,3 +55,4 @@ if __name__ == '__main__':
     pair.sort(key=itemgetter(1))
     print findMaxActivitiesIterative(pair)
     print findMaxActivities(pair)
+    print findMaxActivitiesUsingMaxStartTime(pair)

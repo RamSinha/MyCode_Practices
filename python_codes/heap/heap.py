@@ -54,10 +54,13 @@ def heapSort(seq, result):
     return heapSort(seq, result)
 
 if __name__ == '__main__':
-    l = [1,2,6,3,13]
+    #l = [1,2,6,3,13]
+    l = [48, 12, 24, 7, 8, -5, 24, 391, 24, 56, 2, 6, 8, 41]
     heapify(l)
     print "max_heap = {l}".format(l=l)
-    l = [1,2,6,3,13]
+    #l = [1,2,6,3,13]
+    #l = [48, 12, 24, 7, 8, -5, 24, 391, 24, 56, 2, 6, 8, 41]
+    l = [-10, -7, -9, -5, -7, 2, -6, 2, -8, 8, 10, 5, 4, 9, 3, 8, 3, -2]
     heapify(l,maxHeap = False)
     print "min_heap = {l}".format(l=l)
     result = heapSort(l, [])

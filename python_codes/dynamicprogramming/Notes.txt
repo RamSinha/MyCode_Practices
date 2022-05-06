@@ -17,8 +17,8 @@ Can be considered as topological-sort of sub-problem graph
 
 Runtime:
 Depends on two important factors:
-1- Number of choices available for each problems
-2- Number of sub-problems (DISTINCT)
+1- Number of sub-problems (DISTINCT)
+2- Number of choices available for each problems
 
 For rod cutting:
    1) O(n)
@@ -35,3 +35,14 @@ For metrix multiplication:
     for l in range(2,n+1):
         for i in range(0,n-l+1):
             j=i+l-1
+
+
+NOTE: At every choice in the search space- we need to perform below three things.
+1- Make sure the property of problem holds (ex: total weight of selected items shall not exceed kanpsack size)
+2- Apply the objective function.
+3- Calculate cost using obj function and store the result
+
+
+NOTE-2:
+1- In many cases the recursive problem [sub-problem] requires historical info like how did we reach to a particular subproblem.. in cases like these its important to modify the problem to include additional history information,
+ex: For scheduling problem, we added information about initial inventory and whether the machine was on/off previous day.

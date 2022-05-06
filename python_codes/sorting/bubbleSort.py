@@ -2,14 +2,15 @@
 
 def bubbleSort(array):
     swapped = True
-    for i in range(0, len(array)):
-        if not swapped:
-            print "here"
+    for i in range(len(array))[::-1]:
+        if swapped is False:
             break
-        for j in range(len(array) -1, i - 1, -1):
-            if array[j] < array[j-1]:
+        swapped = False
+        for j in range(0,i):
+            if array[j] >= array[j + 1 ]:
+                swap(array, j , j + 1)
                 swapped = True
-                swap(array, j, j-1)
+
 def swap(array, i, j):
     if array[i] == array[j]:
         return 

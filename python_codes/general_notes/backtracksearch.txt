@@ -1,0 +1,15 @@
+1- Backtrack searching problems can be visualized as the problem of search tree.. 
+   Where we keep on creating branching until no more branch can be created. Once we hit the leave we check the    constraint on the solution in leave. Optionally this may be subjected to some cost function.
+
+
+
+   It also helps to visualise root as SLOTS, and at every branch created we fill some slots.
+   Also while branching out, we don't need to explore the entire tree. Some paths can be rejected based upon      the contraints provided.
+
+
+
+
+
+
+
+2- Branch and bound heruistic ==> when cost to partially constructed solution is defined and cost only increases as we create branches.
